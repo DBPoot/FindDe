@@ -1,10 +1,10 @@
 #!/bin/bash
 #
-# Descr: Script that counts all occurences of "de" in wikipage
+# Descr: Script that counts all occurences of "de" in wikipage from URL
 #
 # Usage: ./find_de.sh <URL>
 
-# get URL
+# get URL from cmdline
 URL=$1
 if [ -z "$URL" ]
 then
@@ -16,7 +16,7 @@ fi
 FILE=`mktemp`
 wget -q "$URL" -O $FILE
 
-# find occurences of "de" or "De", count the amount found
+# remove HTML tags, find occurences of "de" or "De", count the amount found
 echo `cat $FILE | sed "s/<[^>]*>//g" | grep -iow "de" | wc -l`
 
 
